@@ -1,0 +1,24 @@
+import java.io.*; // for handling input/output
+import java.util.*; // contains Collections framework
+
+// don't change the name of this class
+// you can add inner classes if needed
+class Main {
+    static int ways(int x,int nums){
+        int val=(x-nums);
+        if(val==0)
+        return 1;
+        if(val<0)
+        return 0;
+        return ways(val,nums+1)+ways(x,nums+1);
+    }
+    public static void main (String[] args) {
+        // Your code here
+        Scanner sc=new Scanner(System.in);
+        int t=sc.nextInt();
+        while(t-->0){
+            int n=sc.nextInt();
+            System.out.println(ways(n,1));
+        }
+    }
+}
