@@ -1,0 +1,47 @@
+import java.io.*; // for handling input/output
+import java.util.*; // contains Collections framework
+
+// don't change the name of this class
+// you can add inner classes if needed
+class Main {
+    public static void main (String[] args) throws IOException{
+        // Your code here
+        BufferedReader br=new BufferedReader(new InputStreamReader(System.in));
+        int t=Integer.parseInt(br.readLine());
+        while(t>0){
+            int n;
+            long h;
+            String line=br.readLine();
+            String strs[]=line.trim().split("\\s+");
+            n=Integer.parseInt(strs[0]);
+            h=Long.parseLong(strs[1]);
+            long A[]=new long[n];
+            line=br.readLine();
+            strs=line.trim().split("\\s+");
+            for(int i=0;i<n;i++){
+                A[i]=Long.parseLong(strs[i]);
+            }
+            long ng=0;
+            long ok=h;
+            while(ok-ng>1){
+                long x=(ok+ng)/2;
+                long sum=0;
+                for(int k=0;k<n;k++){
+                    if(k==n-1){
+                        sum+=x;
+                    }else{
+                        sum+=Math.min(x,A[k+1]-A[k]);
+                    }
+                }
+                if(sum>=h){
+                    ok=x;
+                }else{
+                    ng=x;
+                }
+            }
+            System.out.print(ok+"\n");
+            t--;
+        }
+
+    }
+}
