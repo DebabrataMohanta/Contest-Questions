@@ -1,0 +1,44 @@
+import java.io.*; // for handling input/output
+import java.util.*; // contains Collections framework
+
+// don't change the name of this class
+// you can add inner classes if needed
+class Main {
+    static List<Integer> prefixProduct=new ArrayList<>();
+    public static void main (String[] args) {
+        // Your code here
+        try{
+            BufferedReader br=new BufferedReader(new InputStreamReader(System.in));
+            String input[]=br.readLine().split(" ");
+            int q=Integer.parseInt(input[0]);
+            int k=Integer.parseInt(input[1]);
+            for(int i=0;i<q;i++){
+                String[] query=br.readLine().split(" ");
+                int queryType=Integer.parseInt(query[0]);
+                if(queryType==1){
+                    add(Integer.parseInt(query[1]));
+                }
+                else{
+                    System.out.println(getProduct(k));
+                }
+            }
+        }catch(Exception e){}
+    }
+    static void add(int num){
+        int sz=prefixProduct.size();
+        if(sz==0)
+        prefixProduct.add(num);
+        else
+        prefixProduct.add(num+prefixProduct.get(sz-1));
+    }
+    static int getProduct(int k){
+        int sz=prefixProduct.size();
+        if(sz==0){
+            return 0;
+        }
+        if(k>=sz)
+        return prefixProduct.get(sz-1);
+        else
+        return prefixProduct.get(sz-1)-prefixProduct.get(sz-k-1);
+    }
+}
